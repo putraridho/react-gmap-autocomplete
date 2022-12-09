@@ -1,0 +1,48 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  height: 100%;
+
+  .card {
+    position: absolute;
+    width: 320px;
+    left: 32px;
+    top: 32px;
+    z-index: 99;
+
+    &__content {
+      padding: 24px;
+      display: grid;
+      gap: 24px;
+    }
+  }
+
+  .map {
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .places {
+    display: grid;
+    gap: 16px;
+
+    &__item {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      padding: 8px;
+      margin: -8px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background: #f2f2f2;
+      }
+
+      p {
+        flex-grow: 1;
+        line-height: 24px;
+      }
+    }
+  }
+}
