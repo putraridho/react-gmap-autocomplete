@@ -49,7 +49,11 @@ function Home() {
       <Wrapper apiKey={gmapApi} libraries={["places"]}>
         <Card className={style.card} variant="outlined">
           <CardContent className={style.card__content}>
-            <Autocomplete onPlaceChanged={handleAddNewPlace} />
+            <Autocomplete
+              className={style.card__input}
+              onPlaceChanged={handleAddNewPlace}
+              loading={maps.loading}
+            />
             <div className={style.places}>
               <Typography variant="overline">Marked Places</Typography>
 

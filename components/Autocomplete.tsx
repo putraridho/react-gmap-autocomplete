@@ -1,15 +1,18 @@
 import { useEffect, useRef } from "react";
 
-import { TextField } from "@mui/material";
+import { LinearProgress, TextField } from "@mui/material";
 
 interface AutocompleteProps {
   options?: google.maps.places.AutocompleteOptions;
   onPlaceChanged?: (place: google.maps.places.PlaceResult | undefined) => void;
+  loading?: boolean;
+  className?: string;
 }
 
 export function Autocomplete({
   onPlaceChanged,
   options,
+  loading,
   ...props
 }: AutocompleteProps) {
   const ref = useRef<google.maps.places.Autocomplete>();
@@ -36,7 +39,12 @@ export function Autocomplete({
     });
   }, [onPlaceChanged]);
 
-  return <TextField inputRef={inputRef} {...props} />;
+  return (
+    <div>
+      <TextField inputRef={inputRef} {...props} />
+      {loading && <LinearProgress />}
+    </div>
+  );
 }
 
 export default Autocomplete;

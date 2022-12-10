@@ -4,6 +4,11 @@ import { EMapAction } from "./types";
 export const mapsActions = {
   addPlace(place?: google.maps.places.PlaceResult) {
     return async (dispatch: Dispatch) => {
+      dispatch({
+        type: EMapAction.SET_LOADING,
+        payload: { loading: true },
+      });
+
       // SIMULATING ASYNC FUNCTION
       try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -11,7 +16,16 @@ export const mapsActions = {
           type: EMapAction.ADD_PLACE,
           payload: { place },
         });
-      } catch (err) {}
+        dispatch({
+          type: EMapAction.SET_LOADING,
+          payload: { loading: false },
+        });
+      } catch (err) {
+        dispatch({
+          type: EMapAction.SET_LOADING,
+          payload: { loading: false },
+        });
+      }
     };
   },
   deletePlace(formatted_address?: string) {
@@ -24,6 +38,12 @@ export const mapsActions = {
     return {
       type: EMapAction.SET_CENTER,
       payload: { center },
+    };
+  },
+  setLoading(loading: boolean) {
+    return {
+      type: EMapAction.SET_LOADING,
+      payload: { loading },
     };
   },
 };

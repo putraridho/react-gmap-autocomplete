@@ -5,6 +5,7 @@ import { EMapAction } from "../actions/types";
 export interface MapsValue {
   places: Array<google.maps.places.PlaceResult>;
   center: google.maps.LatLngLiteral;
+  loading: boolean;
 }
 
 export type TMapsReducer = Reducer<MapsValue, TAction>;
@@ -12,6 +13,7 @@ export type TMapsReducer = Reducer<MapsValue, TAction>;
 const initialState: MapsValue = {
   places: [],
   center: { lat: -6.2, lng: 106.816666 },
+  loading: false,
 };
 
 export const mapsReducer: TMapsReducer = (
@@ -55,6 +57,13 @@ export const mapsReducer: TMapsReducer = (
       return {
         ...state,
         center: action.payload.center || state.center,
+      };
+    }
+
+    case EMapAction.SET_LOADING: {
+      return {
+        ...state,
+        loading: action.payload.loading,
       };
     }
 
