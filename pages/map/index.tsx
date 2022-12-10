@@ -1,16 +1,14 @@
 import { Wrapper } from "@googlemaps/react-wrapper";
-
 import { Card, CardContent, Typography } from "@mui/material";
 import getConfig from "next/config";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
-import { Autocomplete, Map, MarkedPlace } from "../../components";
-import { mapsActions, TAction } from "../../actions";
-import { MapsValue } from "../../reducers";
-
-import { TStore } from "../../utils";
+import { mapsActions, TAction } from "@actions";
+import { Autocomplete, Map, MarkedPlace } from "@components";
+import { MapsValue } from "@reducers";
+import { TStore } from "@utils";
 
 import style from "./style.module.scss";
 
