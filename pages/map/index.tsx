@@ -4,12 +4,13 @@ import { Card, CardContent, Typography } from "@mui/material";
 import getConfig from "next/config";
 import { useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { Dispatch } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 
 import { Autocomplete, Map, MarkedPlace } from "../../components";
+import { mapsActions, TAction } from "../../actions";
+import { MapsValue } from "../../reducers";
 
-import { EMapAction, MapsValue, TAction, TStore } from "../../utils";
+import { TStore } from "../../utils";
 
 import style from "./style.module.scss";
 
@@ -27,38 +28,20 @@ function Home() {
 
   const handleAddNewPlace = useCallback(
     (place: google.maps.places.PlaceResult | undefined) =>
-      thunkDispatch(async (dispatch: Dispatch) => {
-        try {
-          await new Promise((resolve) => setTimeout(resolve, 0));
-          dispatch({
-            type: EMapAction.ADD_PLACE,
-            payload: { place },
-          });
-        } catch (err) {}
-      }),
+      thunkDispatch(mapsActions.addPlace(place)),
     [thunkDispatch]
   );
 
   const handleToCenter = useCallback(
     (place: google.maps.places.PlaceResult) => {
-      thunkDispatch({
-        type: EMapAction.SET_CENTER,
-        payload: {
-          center: place.geometry?.location?.toJSON(),
-        },
-      });
+      thunkDispatch(mapsActions.setCenter(place.geometry?.location?.toJSON()));
     },
     [thunkDispatch]
   );
 
   const handleDeletePlace = useCallback(
     (place: google.maps.places.PlaceResult) => {
-      thunkDispatch({
-        type: EMapAction.DELETE_PLACE,
-        payload: {
-          formatted_address: place.formatted_address,
-        },
-      });
+      thunkDispatch(mapsActions.deletePlace(place.formatted_address));
     },
     [thunkDispatch]
   );

@@ -1,10 +1,17 @@
+import { Dispatch } from "redux";
 import { EMapAction } from "./types";
 
-export const maps = {
+export const mapsActions = {
   addPlace(place?: google.maps.places.PlaceResult) {
-    return {
-      type: EMapAction.ADD_PLACE,
-      payload: { place },
+    return async (dispatch: Dispatch) => {
+      // SIMULATING ASYNC FUNCTION
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        dispatch({
+          type: EMapAction.ADD_PLACE,
+          payload: { place },
+        });
+      } catch (err) {}
     };
   },
   deletePlace(formatted_address?: string) {
