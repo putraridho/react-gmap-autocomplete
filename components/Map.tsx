@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-interface MapProps extends google.maps.MapOptions {
+export interface MapProps extends google.maps.MapOptions {
   className?: string;
   places?: google.maps.places.PlaceResult[];
   onClick?: (e: google.maps.MapMouseEvent) => void;
