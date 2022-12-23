@@ -1,7 +1,7 @@
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Card, CardContent, Typography } from "@mui/material";
 import getConfig from "next/config";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 
@@ -23,6 +23,10 @@ function Home() {
   );
 
   const thunkDispatch: ThunkDispatch<TStore, {}, TAction> = useDispatch();
+
+  useEffect(() => {
+    thunkDispatch(mapsActions.getPlaces());
+  }, [thunkDispatch]);
 
   const handleAddNewPlace = useCallback(
     (place: google.maps.places.PlaceResult | undefined) =>

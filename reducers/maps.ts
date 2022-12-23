@@ -6,6 +6,7 @@ export interface MapsValue {
   places: Array<google.maps.places.PlaceResult>;
   center: google.maps.LatLngLiteral;
   loading: boolean;
+  error: any | undefined;
 }
 
 export type TMapsReducer = Reducer<MapsValue, TAction>;
@@ -14,6 +15,7 @@ const initialState: MapsValue = {
   places: [],
   center: { lat: -6.2, lng: 106.816666 },
   loading: false,
+  error: undefined,
 };
 
 export const mapsReducer: TMapsReducer = (
@@ -21,6 +23,14 @@ export const mapsReducer: TMapsReducer = (
   action: TAction,
 ): MapsValue => {
   switch (action.type) {
+    case EMapAction.GET_PLACES: {
+      return {
+        ...state,
+        places: action.payload.places,
+        loading: false,
+        error: undefined,
+      };
+    }
     case EMapAction.ADD_PLACE: {
       const places = [...state.places];
 
@@ -39,6 +49,8 @@ export const mapsReducer: TMapsReducer = (
         places,
         center:
           action.payload.place?.geometry?.location?.toJSON() || state.center,
+        loading: false,
+        error: undefined,
       };
     }
 
@@ -50,6 +62,8 @@ export const mapsReducer: TMapsReducer = (
       return {
         ...state,
         places,
+        loading: false,
+        error: undefined,
       };
     }
 
@@ -60,12 +74,23 @@ export const mapsReducer: TMapsReducer = (
       };
     }
 
-    case EMapAction.SET_LOADING: {
+    case EMapAction.GET_PLACES_REQUEST:
+    case EMapAction.ADD_PLACE_REQUEST:
+    case EMapAction.DELETE_PLACE_REQUEST:
       return {
         ...state,
-        loading: action.payload.loading,
+        loading: true,
+        error: undefined,
       };
-    }
+
+    case EMapAction.GET_PLACES_REQUEST:
+    case EMapAction.ADD_PLACE_REQUEST:
+    case EMapAction.DELETE_PLACE_REQUEST:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
 
     default: {
       return {
