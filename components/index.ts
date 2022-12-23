@@ -6,5 +6,5 @@ export * from "./MarkedPlace";
 
 export const Map = dynamic(
   import("./Map").then((cmp) => cmp.Map),
-  { ssr: false }
+  { ssr: false },
 ) as React.FC<MapProps>;

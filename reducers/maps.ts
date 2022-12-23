@@ -18,7 +18,7 @@ const initialState: MapsValue = {
 
 export const mapsReducer: TMapsReducer = (
   state = initialState,
-  action: TAction
+  action: TAction,
 ): MapsValue => {
   switch (action.type) {
     case EMapAction.ADD_PLACE: {
@@ -28,7 +28,7 @@ export const mapsReducer: TMapsReducer = (
         action.payload.place &&
         !places.some(
           (place) =>
-            place.formatted_address === action.payload.place?.formatted_address
+            place.formatted_address === action.payload.place?.formatted_address,
         )
       ) {
         places.push(action.payload.place);
@@ -44,7 +44,7 @@ export const mapsReducer: TMapsReducer = (
 
     case EMapAction.DELETE_PLACE: {
       const places = [...state.places].filter(
-        (place) => place.formatted_address !== action.payload.formatted_address
+        (place) => place.formatted_address !== action.payload.formatted_address,
       );
 
       return {

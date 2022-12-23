@@ -2,5 +2,5 @@ export enum EMapAction {
   ADD_PLACE,
   DELETE_PLACE,
   SET_CENTER,
-  SET_LOADING
+  SET_LOADING,
 }

@@ -22,7 +22,7 @@ export function Autocomplete({
     if (inputRef.current) {
       ref.current = new window.google.maps.places.Autocomplete(
         inputRef.current,
-        options
+        options,
       );
     }
 

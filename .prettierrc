@@ -1,0 +1,7 @@
+{
+  "trailingComma": "all",
+  "singleQuote": false,
+  "jsxSingleQuote": false,
+  "useTabs": false,
+  "insertPragma": false
+}

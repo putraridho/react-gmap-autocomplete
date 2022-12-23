@@ -18,12 +18,12 @@ export const MarkedPlace = memo(function MarkedPlace({
 }: MarkedPlaceProps) {
   const handleTextClick = useCallback(
     () => onTextClick(place),
-    [onTextClick, place]
+    [onTextClick, place],
   );
 
   const handleIconClick = useCallback(
     () => onIconClick(place),
-    [onIconClick, place]
+    [onIconClick, place],
   );
 
   return (

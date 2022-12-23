@@ -19,7 +19,7 @@ const {
 function Home() {
   const maps = useSelector<TStore, MapsValue>(
     (state) => state.maps,
-    shallowEqual
+    shallowEqual,
   );
 
   const thunkDispatch: ThunkDispatch<TStore, {}, TAction> = useDispatch();
@@ -27,21 +27,21 @@ function Home() {
   const handleAddNewPlace = useCallback(
     (place: google.maps.places.PlaceResult | undefined) =>
       thunkDispatch(mapsActions.addPlace(place)),
-    [thunkDispatch]
+    [thunkDispatch],
   );
 
   const handleToCenter = useCallback(
     (place: google.maps.places.PlaceResult) => {
       thunkDispatch(mapsActions.setCenter(place.geometry?.location?.toJSON()));
     },
-    [thunkDispatch]
+    [thunkDispatch],
   );
 
   const handleDeletePlace = useCallback(
     (place: google.maps.places.PlaceResult) => {
       thunkDispatch(mapsActions.deletePlace(place.formatted_address));
     },
-    [thunkDispatch]
+    [thunkDispatch],
   );
 
   return (
